@@ -1,0 +1,18 @@
+{
+    "id": "matrix_py_bridge",
+    "version": "0.0.1",
+    "name": "MatrixPyBridge",
+    "description": {
+        "en_us": "A python plugin to sync messages between Minecraft server and matrix chat rooms.",
+        "zh_cn": "一个用于在 Minecraft 服务器和 Matrix 聊天室之间同步消息的 Python 插件。"
+    },
+    "author": "Mooling0602",
+    "link": "https://github.com/Mooling0602/MatrixPyBridge-MCDR",
+    "dependencies": {
+        "mcdreforged": ">=2.14.1"
+    },
+    "entrypoint": "matrix_py_bridge.mcdr.entry",
+    "resources": [
+        "lang"
+    ]
+}
