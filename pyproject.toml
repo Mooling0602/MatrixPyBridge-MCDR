@@ -1,0 +1,10 @@
+[project]
+name = "matrixpybridge"
+version = "0.0.1"
+description = "A python plugin to sync messages between Minecraft server and matrix chat rooms."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "matrix-nio>=0.25.2",
+    "mcdreforged>=2.15.2",
+]
