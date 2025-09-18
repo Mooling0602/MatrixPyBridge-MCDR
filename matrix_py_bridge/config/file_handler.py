@@ -23,7 +23,7 @@ if __name__ == "__main__":
     import os
 
     if not os.path.exists("config.json"):
-        exit
+        exit()
     config = load_file_json("config.json")
     print("Config data type: " + str(type(config)))
     print("Config data content: " + str(config))

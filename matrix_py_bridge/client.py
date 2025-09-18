@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Callable, Union, Optional
 from logging import Logger
 from nio import (
     AsyncClient,
@@ -16,9 +16,9 @@ class MatrixClient:
         user_id: str,
         token: str,
         device_id: Optional[str] = "mcdr",
-        logger: Optional[Logger, callable] = print,
+        logger: Union[Logger, Callable, None] = print,
     ):
-        self.connected: bool = False
+        self.connected: bool = True
         self.client = AsyncClient(homeserver=homeserver)
         self.client.user_id = user_id
         self.client.access_token = token
@@ -47,25 +47,22 @@ class MatrixClient:
                 if hasattr(self.logger, "debug"):
                     self.logger.debug(f"MatrixClient response: {response}")
 
-            def on_sync_error(response: SyncError):
+            async def on_sync_error(response: SyncError):
                 self.network_status = False
-                message = (
-                    "Sync error with matrix homeserver: "
-                    f"{response.status_code}"
-                )
-                RED = "\033[31m"
-                RESET = "\033[0m"
+                _message = f"Sync error with matrix homeserver: {response.status_code}"
+                _ansi_color_red = "\033[31m"
+                _ansi_reset_color = "\033[0m"
                 if not self.logger:
-                    print(RED + message + RESET)
+                    print(_ansi_color_red + _message + _ansi_reset_color)
                 if hasattr(self.logger, "error"):
-                    self.logger.error(message)
+                    self.logger.error(_message)
                 else:
-                    self.logger(RED + message + RESET)
+                    self.logger(_ansi_color_red + _message + _ansi_reset_color)
 
             client.add_response_callback(on_sync_response, SyncResponse)
             client.add_response_callback(on_sync_error, SyncError)
 
             async def message_callback(
                 room: MatrixRoom, event: RoomMessageText
-            ) -> None:
-                raise NotImplementedError()
+            ) -> None:  # 处理接受到的消息回调
+                raise NotImplementedError()  # 咕咕咕……

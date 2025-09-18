@@ -5,6 +5,7 @@ description = "A python plugin to sync messages between Minecraft server and mat
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+    "chardet>=5.2.0",
     "matrix-nio>=0.25.2",
     "mcdreforged>=2.15.2",
 ]
